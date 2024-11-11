@@ -5,10 +5,9 @@ import utils.Random;
 
 import java.util.Locale;
 
-import static utils.Random.*;
-
 public class DemoQAPageObjectsTests extends TestBase {
     Faker faker = new Faker(new Locale("en"));
+    Random randomUtils = new Random();
 
     String firstName = faker.name().firstName();
     String lastName = faker.name().lastName();
@@ -16,18 +15,17 @@ public class DemoQAPageObjectsTests extends TestBase {
     String userNumber = faker.number().digits(10);
     String address = faker.address().fullAddress();
 
-    String gender = Random.getRandomGender();
-    String userSubject = getRandomSubject();
-    String hobby = getUserHobbies();
-    String state = getRandomState();
-    String city = getRandomCity(state);
-    String randomPicture = Random.getRandomPicture();
-    String[] randomDateOfBirth = Random.TestDataGenerator.getRandomDateOfBirth();
+    String gender = randomUtils.getRandomGender();
+    String userSubject = randomUtils.getRandomSubject();
+    String hobby = randomUtils.getUserHobbies();
+    String state = randomUtils.getRandomState();
+    String city = randomUtils.getRandomCity(state);
+    String randomPicture = randomUtils.getRandomPicture();
+    String[] randomDateOfBirth = randomUtils.new TestDataGenerator().getRandomDateOfBirth();
     String day = randomDateOfBirth[0];
     String month = randomDateOfBirth[1];
     String year = randomDateOfBirth[2];
     RegistrationPage registrationPage = new RegistrationPage();
-
 
     @Test
     void formTest() {
@@ -58,17 +56,17 @@ public class DemoQAPageObjectsTests extends TestBase {
                 .checkResult("Address", address)
                 .checkResult("State and City", state + " " + city);
     }
+
     @Test
-    void negativeTest(){
+    void negativeTest() {
         registrationPage.openPage()
                 .submitForm();
 
         registrationPage.checkModalTitleNotVisible("Thanks for submitting the form");
-
-
     }
+
     @Test
-    void minimalTest(){
+    void minimalTest() {
         registrationPage.openPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
@@ -80,6 +78,5 @@ public class DemoQAPageObjectsTests extends TestBase {
                 .checkResult("Student Name", firstName + " " + lastName)
                 .checkResult("Gender", gender)
                 .checkResult("Mobile", userNumber);
-
     }
 }
