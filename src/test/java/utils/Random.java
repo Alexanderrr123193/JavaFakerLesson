@@ -60,8 +60,6 @@ public class Random {
     }
 
     public static class TestDataGenerator {
-        private static final Faker faker = new Faker();
-        private static final Random random = new Random();
 
         public static String[] getRandomDateOfBirth() {
             int day = getRandomInt(1, 28);

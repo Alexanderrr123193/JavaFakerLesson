@@ -51,7 +51,7 @@ public class DemoQAPageObjectsTests extends TestBase {
                 .checkResult("Student Email", userEmail)
                 .checkResult("Gender", gender)
                 .checkResult("Mobile", userNumber)
-                .checkResult("Date of Birth", day + " " + month + ", " + year)
+                .checkResult("Date of Birth", day + " " + month + "," + year)
                 .checkResult("Subjects", userSubject)
                 .checkResult("Hobbies", hobby)
                 .checkResult("Picture", randomPicture)
